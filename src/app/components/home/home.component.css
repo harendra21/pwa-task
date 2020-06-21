@@ -1,0 +1,18 @@
+.text-black{
+    color: #000;
+}
+img.card-img-top {
+    object-fit: cover;
+    height: 230px;
+    margin: 0 auto;
+}
+img:hover{
+    transform: scale(1.05);
+}
+img{
+    -webkit-transition: 0.3s ease-in-out;
+    transition: 0.3s ease-in-out;
+}
+.text-muted.text-small {
+    font-size: 13px;
+}

@@ -1,0 +1,67 @@
+<app-nav (logoutClick)="logout()"></app-nav>
+<div class="container-fluid animate__animated animate__fadeIn">
+    
+    
+    <div class="row" >
+        <div class="col-md-3" *ngIf="showFilter">
+            <input type="text" class="form-control" placeholder="Search by name" (input)="filter('name',$event.target.value)">
+        </div>
+        <div class="col-md-3" *ngIf="showFilter">
+
+            <div ngbDropdown>
+                <button class="btn" id="dropdownBasic2" ngbDropdownToggle >
+                    <span *ngIf="sun_sign == null">Select Sun Sign</span>
+                    <span *ngIf="sun_sign != null">{{ sun_sign }}</span>
+                </button>
+                <div ngbDropdownMenu aria-labelledby="dropdownBasic2">
+                    <button ngbDropdownItem (click)="filter('sun_sign',null)">Clear</button>
+                    <button ngbDropdownItem href="#" *ngFor="let sign of signs" (click)="filter('sun_sign',sign.sign)">
+                        {{ sign.sign }}
+                    </button>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-3" *ngIf="showFilter">
+            
+            <div ngbDropdown>
+                <button class="btn" id="dropdownBasic1" ngbDropdownToggle >
+                    <span *ngIf="gender == null">Select Gender</span>
+                    <span *ngIf="gender == '1'">Male</span>
+                    <span *ngIf="gender == '2'">Female</span>
+                </button>
+                <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                    <button ngbDropdownItem (click)="filter('gender',null)">Clear</button>
+                    <button ngbDropdownItem (click)="filter('gender','1')">Male</button>
+                    <button ngbDropdownItem (click)="filter('gender','2')">Female</button>
+                </div>
+            </div>
+            
+        </div>
+        <div class="col text-right">
+            <button *ngIf="!showFilter" class="btn btn-primary" (click)="showFilter = true">Show Filter</button>
+            <button *ngIf="showFilter" class="btn btn-primary" (click)="showFilter = false">Hide Filter</button>
+        </div>
+    </div>
+    
+    <br>
+
+    <div class="row">
+        <div class="col-md-3 col-sm-4" *ngFor="let user of users ; let i = index">
+            <div class="card animate__animated animate__fadeInUp">
+                <div class="card-image">
+                    <img class="card-img-top" src="{{ this.storage_url+'/'+user.image }}" alt="Card image cap">
+                </div>
+                <div class="card-body text-black">
+                    <h6 class="card-title">{{ user.name }}</h6>
+                    <div class="text-muted text-small">
+                        <app-gender gender="{{ user.gender }}"></app-gender> / 
+                        <app-dobage dob="{{ user.dob }}"></app-dobage> / 
+                        {{ user.sun_sign }}
+                    </div>
+                </div>
+              </div>
+              <br>
+        </div>
+    </div>
+</div>
